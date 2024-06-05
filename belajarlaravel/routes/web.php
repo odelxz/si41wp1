@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdiController;
 
@@ -27,3 +28,27 @@ Route::get('/', function () {
 // });
 
 Route::get('/fakultas',[ProdiController::class,'index']);
+
+Route::get('/mahasiswa/insert', [MahasiswaController::class,'insert']);
+Route::get('/mahasiswa/update', [MahasiswaController::class,'update']);
+Route::get('/mahasiswa/delete', [MahasiswaController::class,'delete']);
+Route::get('/mahasiswa/select', [MahasiswaController::class,'select']);
+
+Route::get('/mahasiswa/insert-qb', [MahasiswaController::class,'insertQb']);
+Route::get('/mahasiswa/update-qb', [MahasiswaController::class,'updateQb']);
+Route::get('/mahasiswa/delete-qb', [MahasiswaController::class,'deleteQb']);
+Route::get('/mahasiswa/select-qb', [MahasiswaController::class,'selectQB']);
+
+Route::get('/mahasiswa/insert-elq', [MahasiswaController::class,'insertElq']);
+Route::get('/mahasiswa/update-elq', [MahasiswaController::class,'updateElq']);
+Route::get('/mahasiswa/delete-elq', [MahasiswaController::class,'deleteElq']);
+Route::get('/mahasiswa/select-elq', [MahasiswaController::class,'selectElq']);
+
+Route::get('/prodi/all-join-facade', [ProdiController::class, 'allJoinFacade']);
+Route::get('/prodi/all-join-elq', [ProdiController::class, 'allJoinElq']);
+Route::get('/mahasiswa/all-join-elq', [MahasiswaController::class, 'allJoinElq']);
+
+Route::get('/prodi/create', [ProdiController::class, 'create'])->name('prodi.create');
+Route::post('/prodi/store', [ProdiController::class, 'store']);
+Route::get('/prodi', [ProdiController::class, 'index'])->name('prodi.index');
+Route::get('/prodi/{id}', [ProdiController::class, 'show'])->name('prodi.show');
