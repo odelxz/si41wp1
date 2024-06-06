@@ -18,7 +18,8 @@ class ProdiController extends Controller
         // return view('fakultas.index',compact('fakultas','kampus'));
 
         $prodis= Prodi::all();
-        return view('prodi.index')->with(['prodis',$prodis,]);
+        return view('prodi.index')->with(compact('prodis','kampus'));
+        //return view('prodi.index',compact('prodis','kampus'));
     }
 
     public function allJoinFacade(){
@@ -66,4 +67,34 @@ class ProdiController extends Controller
       $request->session()->flash('info','Data berhasil disimpan');
       return redirect('prodi/create');
     }
+
+    public function show(Prodi $prodi){
+        //echo $prodi;
+        $kampus="Universitas Multi Data Palembang";
+        return view('prodi.show',['prodi'=> $prodi,'kampus' =>$kampus]);
+    }
+
+    public function edit(Prodi $prodi){
+        return view('prodi.edit',[
+        'prodi' => $prodi,
+        'kampus' => "Universitas Multi Data Palembang"
+        ]);
+
+    }
+
+    public function update(Request $request, Prodi $prodi){
+        $validateData = $request->validate([
+          'nama' => 'required|min:5|max:20',
+        ]);
+
+
+        Prodi::where('id',$prodi->id)->update($validateData);
+
+
+        $request->session()->flash('info','Data berhasil disimpan');
+        return redirect('prodi');
+
+
+  }
+
 }
